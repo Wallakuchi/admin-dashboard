@@ -7,9 +7,9 @@ const cors = require("cors");
 app.use(cors());
 const PORT = process.env.PORT || 4500;
 
-const DB_NAME = "admindata";
+const DB_NAME = "myappdata";
 const USER_TBL = "users";
-const url = `mongodb://localhost:27017/${DB_NAME}`;
+const url = `mongodb+srv://santosh:tuo7T5yybWzMN5Re@cluster0.5bx98ik.mongodb.net/myappdata?retryWrites=true&w=majority/${DB_NAME}`;
 
 app.get("/", (req, res) => {
   res.send("API is working");
