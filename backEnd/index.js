@@ -5,7 +5,7 @@ const Database = require("./mongodb");
 
 const cors = require("cors");
 app.use(cors());
-const PORT = 4500;
+const PORT = process.env.PORT || 4500;
 
 const DB_NAME = "admindata";
 const USER_TBL = "users";
@@ -23,14 +23,14 @@ app.post("/login", async (req, res) => {
   await db.connect(url, DB_NAME);
 
   const tbl = await db.selectTable(USER_TBL);
-//   console.log(tbl);
+  //   console.log(tbl);
 
-//------------------------------------------------------
+  //------------------------------------------------------
   const checkUser = await tbl.findOne();
   console.log(checkUser);
 
-//If userdata doesn't exist
-//-----------------------------------------------------------
+  //If userdata doesn't exist
+  //-----------------------------------------------------------
   if (!checkUser) {
     const payload = {
       name: "Santosh",
@@ -53,10 +53,10 @@ app.post("/login", async (req, res) => {
       return;
     }
     res.json({ message: "Invalid username or password", status: 0 });
-  } 
-  
-//If userdata exist
-//-----------------------------------------------------------
+  }
+
+  //If userdata exist
+  //-----------------------------------------------------------
   else {
     const data = await db.selectOne(tbl, {
       username: reqData.username,
